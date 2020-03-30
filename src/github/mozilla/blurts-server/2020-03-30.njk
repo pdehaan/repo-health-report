@@ -1,0 +1,88 @@
+---
+title: "mozilla/blurts-server"
+date: "2020-03-30"
+layout: layouts/base.njk
+---
+
+{% set _data = mozilla["blurts-server"][date] %}
+
+<header>
+  <h1 class="text-4xl">{{ _data.owner }}/{{ _data.repo }} <small class="text-xs">({{ _data.date }})</small></h1>
+</header>
+
+<nav>
+  {% for label in _data.labels | sort("label") %}
+  <a href="#{{ label.label }}" class="inline-flex items-center px-2.5 py-0.5 rounded-full border-solid border-2 text-xs font-medium leading-4" style="border-color: #{{ _data.repoLabels[label.label].color }};">{{ label.label }} ({{ label.count }})</a></li>
+  {% endfor %}
+</nav>
+
+<main>
+{% for label in _data.labels %}
+  {% set labelDescription = _data.repoLabels[label.label].description %}
+  <section id="{{ label.label }}" class="bg-gray-100 overflow-hidden shadow rounded-lg">
+    <header class="px-4 py-5 border-b border-gray-200 sm:px-6">
+      <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap">
+        <div class="ml-4 mt-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">{{ label.label }}</h3>
+          {% if labelDescription.length %}
+          <p class="mt-1 text-sm leading-5 text-gray-500">{{ labelDescription }}</p>
+          {% endif %}
+          </p>
+        </div>
+        <aside class="ml-4 mt-4 flex-shrink-0">
+          <span class="inline-flex rounded-md shadow-sm">
+            <span class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md">
+              {{ label.count | pluralize("issue", true) }} &ndash; {{ label.pct | to_fixed }}%
+            </span>
+          </span>
+        </aside>
+      </div>
+    </header>
+
+    <div class="bg-white px-4 py-5 sm:p-6">
+      <ol>
+      {% for issue in label.issues %}
+        {# <li>
+          <a href="{{ issue.html_url | url }}" class="text-blue-500 hover:text-blue-700"><b class="font-weight-bold">[#{{ issue.number }}]</b> {{ issue.title }}</a><br/>
+          <small class="text-s">
+          {% if issue.labels.length %}
+          Labels: {% for label in issue.labels %}<a href="#{{ label.name }}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 text-blue-500 hover:text-blue-700">{{ label.name }}</a> {% endfor %}<br/>
+          {% endif %}
+          Created: {{ issue.created_at | locale_date_string }}
+          </small>
+        </li> #}
+
+        <li class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+          <div class="px-4 py-4 sm:px-6">
+            <div class="flex items-center justify-between">
+              <div class="text-sm leading-5 font-medium truncate">
+                <a href="{{ issue.html_url | url }}" class="text-indigo-600 hover:text-indigo-500">
+                  <b class="font-bold">[#{{ issue.number }}]</b> {{ issue.title }}
+                </a>
+              </div>
+              <div class="ml-2 flex-shrink-0 flex">
+                <p class="text-xs text-gray-600">Created: {{ issue.created_at | locale_date_string }}</p>
+              </div>
+            </div>
+            {% if issue.labels.length %}
+            <div class="mt-2 sm:flex sm:justify-between">
+              <div class="sm:flex">
+                <div class="mr-6 flex items-center text-sm leading-5 text-gray-500">
+                  {% for label in issue.labels %}
+                  <a class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800" href="#{{ label.name }}">
+                    {{ label.name }}
+                  </a>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+      </ol>
+    </div>
+  </section>
+  <br/>
+{% endfor %}
+</main>

@@ -1,0 +1,36 @@
+{
+  "name": "repo-health-report",
+  "description": "Fetch GitHub repos and generate a report.",
+  "version": "1.0.0",
+  "author": "Peter deHaan <peter@deseloper.com> (https://about.me/peterdehaan)",
+  "dependencies": {
+    "@11ty/eleventy": "^0.10.0",
+    "@octokit/rest": "^17.1.4",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.0.0",
+    "pluralize": "^8.0.0"
+  },
+  "keywords": [
+    "github",
+    "bugs"
+  ],
+  "license": "MPL-2.0",
+  "main": "index.js",
+  "repos": [
+    {
+      "owner": "mozilla",
+      "repo": "blurts-server"
+    },
+    {
+      "owner": "mozilla",
+      "repo": "send"
+    }
+  ],
+  "scripts": {
+    "build": "eleventy",
+    "fetch": "node fetch",
+    "serve": "eleventy --serve",
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
