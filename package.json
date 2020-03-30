@@ -3,6 +3,9 @@
   "description": "Fetch GitHub repos and generate a report.",
   "version": "1.0.0",
   "author": "Peter deHaan <peter@deseloper.com> (https://about.me/peterdehaan)",
+  "bugs": {
+    "url": "https://github.com/pdehaan/repo-health-report/issues"
+  },
   "dependencies": {
     "@11ty/eleventy": "^0.10.0",
     "@octokit/rest": "^17.1.4",
@@ -10,9 +13,11 @@
     "fs-extra": "^9.0.0",
     "pluralize": "^8.0.0"
   },
+  "devDependencies": {},
+  "homepage": "https://github.com/pdehaan/repo-health-report#readme",
   "keywords": [
-    "github",
-    "bugs"
+    "bugs",
+    "github"
   ],
   "license": "MPL-2.0",
   "main": "index.js",
@@ -26,6 +31,10 @@
       "repo": "send"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdehaan/repo-health-report.git"
+  },
   "scripts": {
     "build": "eleventy",
     "fetch": "node fetch",
