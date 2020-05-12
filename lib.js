@@ -1,20 +1,52 @@
 const github = require("./gh-client");
+const ms = require("ms");
 
 module.exports = {
   fetchGitHubIssues,
+  fetchGitHubPullRequests,
   groupByLabel,
 };
 
 async function fetchGitHubIssues(owner, repo, date) {
+  const now = new Date();
   const issues = await github.getGitHubIssues({ owner, repo });
-  const repoLabels = await github.getGitHubLabels({ owner, repo });
+  const labels = await github.getGitHubLabels({ owner, repo });
 
   return {
     owner,
     repo,
     date,
-    labels: groupByLabel(issues),
-    repoLabels,
+    now,
+    issueStats: issueStats(issues, now),
+    labels,
+    labelIssues: groupByLabel(issues),
+  };
+}
+
+async function fetchGitHubPullRequests(owner, repo, date) {
+  const now = new Date();
+  const prs = await github.getGitHubPullRequests({ owner, repo });
+
+  return {
+    owner,
+    repo,
+    date,
+    now,
+    prStats: issueStats(prs, now),
+    prs,
+  };
+}
+
+function issueStats(issues, now = new Date()) {
+  const totalAgeMs = issues.reduce(
+    (totalMs, { created_at }) => totalMs + (now - new Date(created_at)),
+    0
+  );
+  const avgAgeMs = totalAgeMs / issues.length;
+  return {
+    avgAgeMs,
+    avgAge: ms(avgAgeMs),
+    issueCount: issues.length,
   };
 }
 

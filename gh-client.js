@@ -30,7 +30,7 @@ async function getGitHubIssues(options) {
  * @param {object} options
  * @returns {array}
  */
-async function getGitHubLabels(options) {
+async function getGitHubLabels(options = {}) {
   options = Object.assign(
     {
       per_page: 100, // Max 100
@@ -47,7 +47,19 @@ async function getGitHubLabels(options) {
   }, {});
 }
 
+async function getGitHubPullRequests(options = {}) {
+  options = Object.assign(
+    {
+      per_page: 100, // Max 100
+    },
+    options
+  );
+  const $options = await github.pulls.list.endpoint.merge(options);
+  return github.paginate($options);
+}
+
 module.exports = {
   getGitHubIssues,
   getGitHubLabels,
+  getGitHubPullRequests,
 };

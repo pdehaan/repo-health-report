@@ -1,0 +1,10 @@
+{
+  "bugzilla": [],
+  "github": [
+    { "owner": "mozilla", "repo": "blurts-server" },
+    { "owner": "mozilla", "repo": "fx-private-relay" },
+    { "owner": "mozilla", "repo": "fxa" },
+    { "owner": "mozilla", "repo": "secure-proxy" },
+    { "owner": "mozilla", "repo": "send" }
+  ]
+}

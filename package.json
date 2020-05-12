@@ -7,38 +7,34 @@
     "url": "https://github.com/pdehaan/repo-health-report/issues"
   },
   "dependencies": {
-    "@11ty/eleventy": "^0.10.0",
+    "@11ty/eleventy": "^0.11.0",
     "@octokit/rest": "^17.1.4",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.0",
+    "ms": "^2.1.2",
     "pluralize": "^8.0.0"
   },
-  "devDependencies": {},
-  "homepage": "https://github.com/pdehaan/repo-health-report#readme",
+  "devDependencies": {
+    "nunjucks": "^3.2.1"
+  },
+  "homepage": "https://repo-health-report.now.sh/",
   "keywords": [
     "bugs",
     "github"
   ],
   "license": "MPL-2.0",
   "main": "index.js",
-  "repos": [
-    {
-      "owner": "mozilla",
-      "repo": "blurts-server"
-    },
-    {
-      "owner": "mozilla",
-      "repo": "send"
-    }
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pdehaan/repo-health-report.git"
   },
   "scripts": {
     "build": "eleventy",
+    "prod": "npm run stage -- --prod",
     "fetch": "node fetch",
+    "prestage": "npm run build",
     "serve": "eleventy --serve",
+    "stage": "npx now ./www",
     "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

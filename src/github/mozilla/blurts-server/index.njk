@@ -1,0 +1,38 @@
+{% set $data = blurts_server %}
+{% set issue_count = $data.stats.open %}
+{% set pr_count = 3 %}
+
+<section class="p-4">
+  {% include "summary-cards.njk" %}
+
+  <script>
+    const barChartData = {
+      labels: {{ $data.daily | map("startTime") | map_date | dump | safe }},
+      datasets: [
+        {
+          label: "Open",
+          data: {{ $data.daily | map("openIssues") | dump | safe }},
+          backgroundColor: '#6875f5',
+          borderColor: '#6875f5',
+          fill: false
+        }
+      ]
+    };
+  </script>
+  {% include "bug-chart.njk" %}
+
+  <h2 class="text-xl">LABELS</h2>
+  <ol class="list-decimal">
+  {%- set $labels = $data.labels | sort(true, false, "openIssuesCount") %}
+  {%- for label in $labels %}
+    {% if label.openIssuesCount != 0 %}
+    {%- set $label = label.name %}
+    {%- if $label == "Unlabeled" %}
+      {%- set $label = undefined %}
+    {%- endif %}
+    <li><a href="{{ $label | github_issues(owner, repo) }}" class="font-mono font-sm text-indigo-500 hover:text-indigo-700">{{ label.name }}</a> &mdash; {{ label.openIssuesCount | pluralize("issue", true) }} <span class="text-sm">({{ label.openIssuesPct | to_fixed(1) }}%)</span></li>
+    {% endif %}
+  {%- endfor %}
+  </ol>
+
+</section>

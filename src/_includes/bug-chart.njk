@@ -1,0 +1,27 @@
+<canvas id="myChart" width="400" height="150"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
+<script>
+  const ctx = document.getElementById("myChart").getContext("2d");
+  const myChart = new Chart(ctx, {
+    type: "line",
+    data: barChartData,
+    options: {
+      title: {
+        display: true,
+        text: "Daily # open bugs"
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false
+      },
+      scales: {
+        xAxes: [{
+          stacked: true,
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    }
+  });
+</script>
