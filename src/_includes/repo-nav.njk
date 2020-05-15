@@ -1,7 +1,11 @@
 <h3 class="text-l text-white">GitHub</h3>
 {% for repo in repos.github %}
+{% if repo.owner and repo.repo %}
 <a href="/github/{{repo.owner}}/{{repo.repo}}/" class="mt-1 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-indigo-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150">
   {% include "report.svg.njk" %}
   {{repo.repo}}
 </a>
+{% else %}
+<div class="border border-dotted border-gray-600"></div>
+{% endif %}
 {% endfor %}

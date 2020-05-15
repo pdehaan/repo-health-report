@@ -22,7 +22,7 @@
   {% include "bug-chart.njk" %}
 
   <h2 class="text-xl">LABELS</h2>
-  <ol class="list-decimal">
+  <ol class="list-decimal list-inside">
   {%- set $labels = $data.labels | sort(true, false, "openIssuesCount") %}
   {%- for label in $labels %}
     {% if label.openIssuesCount != 0 %}

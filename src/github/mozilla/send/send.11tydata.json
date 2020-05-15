@@ -1,5 +1,9 @@
 {
   "owner": "mozilla",
   "repo": "send",
-  "title": "Firefox Send"
+  "title": "Firefox Send",
+  "labels": [
+    "[QA]:Blocker issue",
+    "[QA]:Major issue"
+  ]
 }

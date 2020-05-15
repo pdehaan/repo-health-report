@@ -1,5 +1,10 @@
 {
   "owner": "mozilla",
   "repo": "fxa",
-  "title": "Firefox Accounts"
+  "title": "Firefox Accounts",
+  "labels": [
+    "severity:blocker",
+    "severity:major",
+    "status:regression"
+  ]
 }

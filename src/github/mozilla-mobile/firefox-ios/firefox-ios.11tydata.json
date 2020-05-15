@@ -1,0 +1,9 @@
+{
+  "owner": "mozilla-mobile",
+  "repo": "firefox-ios",
+  "title": "Firefox for iOS",
+  "labels": [
+    "Crash",
+    "Release Blocker"
+  ]
+}

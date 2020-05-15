@@ -1,0 +1,10 @@
+{
+  "owner": "mozilla-mobile",
+  "repo": "android-components",
+  "title": "Android Components",
+  "labels": [
+    "💥 crash",
+    "🎲 intermittent-test",
+    "🔥 release blocker"
+  ]
+}

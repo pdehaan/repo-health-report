@@ -1,10 +1,15 @@
 {
   "bugzilla": [],
   "github": [
+    { "owner": "mozilla", "repo": "addons-server" },
     { "owner": "mozilla", "repo": "blurts-server" },
     { "owner": "mozilla", "repo": "fx-private-relay" },
     { "owner": "mozilla", "repo": "fxa" },
     { "owner": "mozilla", "repo": "secure-proxy" },
-    { "owner": "mozilla", "repo": "send" }
+    { "owner": "mozilla", "repo": "send" },
+    { "type": "divider" },
+    { "owner": "mozilla-mobile", "repo": "android-components" },
+    { "owner": "mozilla-mobile", "repo": "fenix" },
+    { "owner": "mozilla-mobile", "repo": "firefox-ios" }
   ]
 }

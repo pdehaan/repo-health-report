@@ -1,0 +1,10 @@
+{
+  "owner": "mozilla-mobile",
+  "repo": "fenix",
+  "title": "Firefox Preview",
+  "labels": [
+    "b:crash",
+    "intermittent-test",
+    "Release Blocker"
+  ]
+}

@@ -1,5 +1,9 @@
 {
   "owner": "mozilla",
   "repo": "secure-proxy",
-  "title": "Firefox Secure Proxy"
+  "title": "Firefox Secure Proxy",
+  "labels": [
+    "[QA]:Blocker issue",
+    "[QA]:Major issue"
+  ]
 }
