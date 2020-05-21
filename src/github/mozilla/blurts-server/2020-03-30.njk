@@ -12,7 +12,7 @@ layout: layouts/base.njk
 
 <nav>
   {% for label in _data.labels | sort("label") %}
-  <a href="#{{ label.label }}" class="inline-flex items-center px-2.5 py-0.5 rounded-full border-solid border-2 text-xs font-medium leading-4" style="border-color: #{{ _data.repoLabels[label.label].color }};">{{ label.label }} ({{ label.count }})</a></li>
+  <a href="#{{ label.label }}" class="inline-flex items-center px-2.5 py-0.5 rounded-full border-solid border-2 text-xs font-medium leading-4" style="border-color: #{{ _data.repoLabels[label.label].color }};">{{ label.label }} ({{ label.count }})</a>
   {% endfor %}
 </nav>
 

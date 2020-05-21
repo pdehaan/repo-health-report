@@ -3,8 +3,9 @@
   "repo": "fenix",
   "title": "Firefox Preview",
   "labels": [
-    "b:crash",
     "intermittent-test",
+    "eng:automation",
+    "eng:release",
     "Release Blocker"
   ]
 }

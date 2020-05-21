@@ -11,6 +11,7 @@
     "@octokit/rest": "^17.1.4",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.0",
+    "json-to-table": "^4.2.0",
     "lru-cache": "^5.1.1",
     "ms": "^2.1.2",
     "pluralize": "^8.0.0"

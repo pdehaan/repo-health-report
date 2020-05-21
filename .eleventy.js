@@ -1,8 +1,13 @@
+const axios = require("axios");
+const dotenv = require("dotenv");
+const jsonToTable = require('json-to-table');
 const ms = require("ms");
 const njkFilters = require("nunjucks/src/filters");
 const pluralize = require("pluralize");
 
 const gh = require("./gh-client");
+
+dotenv.config();
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addNunjucksFilter("map", (arr = [], key = "") =>
@@ -29,13 +34,7 @@ module.exports = function (eleventyConfig) {
     }
   );
 
-  eleventyConfig.addFilter("locale_date_string", (date) =>
-    new Date(date).toLocaleDateString([], {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-  );
+  eleventyConfig.addFilter("locale_date_string", localeDate);
   eleventyConfig.addFilter("to_fixed", (number, precision = 1) =>
     Number(number).toFixed(precision)
   );
@@ -72,6 +71,19 @@ module.exports = function (eleventyConfig) {
     </section>`;
   });
 
+  eleventyConfig.addNunjucksAsyncShortcode("sql_telemetry", async function (uri, title="") {
+    const data = await axios
+      .get(uri)
+      .then((res) => res.data);
+    const table = jsonToTable(data.query_result.data.rows);
+    const tableHTML = table.map((row=[], idx=0) => {
+      const tag = idx === 0 ? "th" : "td";
+      const cols = row.map(col => `<${tag} class="border border-gray-400 p-2">${col}</${tag}>`).join("");
+      return `<tr>${cols}</tr>`;
+    }).join("");
+    return `<h2 class="text-xl pt-4">${title}</h2>\n<table class="table-auto w-auto border-collapse border-2 border-gray-500">${tableHTML}</table>`;
+  });
+
   return {
     dir: {
       input: "src",
@@ -79,3 +91,12 @@ module.exports = function (eleventyConfig) {
     },
   };
 };
+
+
+function localeDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString([], {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
